@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ───────────────────────────────────────────────────────────── */
+:root {
+  /* Base surfaces */
+  --bg-base:        #070c18;
+  --bg-surface:     #0d1526;
+  --bg-elevated:    #111d33;
+
+  /* Borders */
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+
+  /* Accent */
+  --accent-primary: #6366f1;   /* indigo-500 */
+  --accent-glow:    rgba(99, 102, 241, 0.35);
+
+  /* Text */
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+}
+
+/* ── Global reset ────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.35);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.6);
+}
+
+/* ── Text selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+/* ── Animated dot grid background ───────────────────────────────────────────── */
+.dot-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Glassmorphism panel ─────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(13, 21, 38, 0.7);
+  border: 1px solid var(--border-default);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── Glow utilities ──────────────────────────────────────────────────────────── */
+.glow-indigo {
+  box-shadow: 0 0 30px 4px var(--accent-glow);
+}
+
+/* ── Font overrides for mono ─────────────────────────────────────────────────── */
+.font-mono {
+  font-family: var(--font-jetbrains-mono), 'Fira Code', monospace !important;
+}
+
+/* ── Shimmer animation (for loading states) ──────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #0d1526 25%, #1a2744 50%, #0d1526 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* ── Pulse for live indicator ────────────────────────────────────────────────── */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.5); }
+}
+.live-dot {
+  animation: live-pulse 1.4s ease-in-out infinite;
+}
