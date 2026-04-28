@@ -27,8 +27,8 @@ GridWars is an interactive, real-time shared multiplayer grid game where users c
 
 **1. Clone the repository**
 ```bash
-git clone <your-repo>
-cd Assignment
+git clone gridwars
+
 ```
 
 **2. Start the Backend**
