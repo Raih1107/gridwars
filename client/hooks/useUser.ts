@@ -12,7 +12,7 @@ const NOUNS = [
   'Lynx', 'Eagle', 'Bear', 'Shark', 'Knight', 'Phoenix', 'Hydra', 'Comet',
 ];
 
-// ─── Color palette ─────────────────────────────────────────────────────────────
+//Color palette 
 // Vivid, distinct colors that look great on the dark grid background
 const COLORS = [
   '#FF3366', // Neon Pink

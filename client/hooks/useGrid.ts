@@ -1,7 +1,7 @@
 import { socket } from '@/lib/socket';
 import { useCallback, useEffect, useState } from 'react';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// Types 
 export type BlockData = {
   userId: string;
   username: string;
@@ -18,7 +18,7 @@ export type LeaderboardEntry = {
   count: number;
 };
 
-// ─── Hook ─────────────────────────────────────────────────────────────────────
+// Hook 
 /**
  * useGrid - manages all grid state and socket event listeners.
  * 

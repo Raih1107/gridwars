@@ -14,7 +14,7 @@ const io = new Server(server, {
   },
 });
 
-// ─── Grid Configuration ──────────────────────────────────────────────────────
+
 const GRID_SIZE = 25; // 30x30 = 900 blocks
 
 /**
@@ -23,12 +23,12 @@ const GRID_SIZE = 25; // 30x30 = 900 blocks
  */
 let gridState = {};
 
-// ─── Per-user cooldown map ─────────────────────────────────────────────────────
+// Per-user cooldown map
 // Prevents spamming: users can only place a block every COOLDOWN_MS milliseconds
 const COOLDOWN_MS = 400;
 const lastCapture = {}; // { socketId: timestamp }
 
-// ─── Broadcast helpers ────────────────────────────────────────────────────────
+// Broadcast helpers
 const broadcastUserCount = () => {
   io.emit('user_count', io.engine.clientsCount);
 };
@@ -60,7 +60,7 @@ const computeLeaderboard = () => {
     .slice(0, 10); // Top 10
 };
 
-// ─── REST endpoint: health check ──────────────────────────────────────────────
+// REST endpoint: health check
 app.get('/health', (_req, res) => {
   res.json({
     status: 'ok',
@@ -70,7 +70,12 @@ app.get('/health', (_req, res) => {
   });
 });
 
-// ─── Socket Logic ─────────────────────────────────────────────────────────────
+// To keep the backend alive
+app.get('/ping', (_req, res) => {
+  res.send('pong');
+});
+
+// Socket Logic
 io.on('connection', (socket) => {
   console.log(`[+] User connected:  ${socket.id}`);
 
@@ -87,7 +92,7 @@ io.on('connection', (socket) => {
   socket.on('capture_block', (data) => {
     const { x, y, userId, color, username } = data;
 
-    // ── Validate inputs ──────────────────────────────────────────────────────
+    //Validate inputs
     if (
       x === undefined ||
       y === undefined ||
@@ -105,7 +110,7 @@ io.on('connection', (socket) => {
       return;
     }
 
-    // ── Cooldown check ───────────────────────────────────────────────────────
+    // Cooldown check 
     const now = Date.now();
     if (lastCapture[socket.id] && now - lastCapture[socket.id] < COOLDOWN_MS) {
       // User is placing too fast — silently drop, no penalty
@@ -113,7 +118,7 @@ io.on('connection', (socket) => {
     }
     lastCapture[socket.id] = now;
 
-    // ── Update server state ──────────────────────────────────────────────────
+    // Update server state 
     const key = `${x},${y}`;
     gridState[key] = {
       userId,
@@ -122,14 +127,14 @@ io.on('connection', (socket) => {
       timestamp: now,
     };
 
-    // ── Broadcast update to ALL users ────────────────────────────────────────
+    // Broadcast update to ALL users
     io.emit('block_updated', {
       x,
       y,
       ...gridState[key],
     });
 
-    // ── Broadcast updated leaderboard to ALL users ───────────────────────────
+    // Broadcast updated leaderboard to ALL users
     io.emit('leaderboard', computeLeaderboard());
   });
 
@@ -141,10 +146,11 @@ io.on('connection', (socket) => {
   });
 });
 
-// ─── Start server ─────────────────────────────────────────────────────────────
+// Start server
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
   console.log(`\n✅  GridWars backend is running at http://localhost:${PORT}`);
   console.log(`   Grid Size : ${GRID_SIZE}x${GRID_SIZE} (${GRID_SIZE * GRID_SIZE} blocks)`);
   console.log(`   Cooldown  : ${COOLDOWN_MS}ms per user\n`);
 });
+
