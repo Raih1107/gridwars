@@ -11,6 +11,7 @@ A fast-paced, real-time multiplayer territory game. Capture tiles, compete with 
 GridWars is a "Midnight Protocol" themed shared canvas. I built this to explore the challenges of syncing state across hundreds of clients simultaneously. It features a sleek glassmorphism UI, neon-reactive blocks, and a live leaderboard.
 
 Key Features:
+
 Instant Sync: Sub-100ms updates across all clients using WebSockets.
 
 Anti-Spam: Server-side 400ms cooldowns to keep the game fair.
