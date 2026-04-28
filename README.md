@@ -2,10 +2,9 @@
 
 GridWars is an interactive, real-time shared multiplayer grid game where users compete to capture territory on a global board. Built as a high-performance WebSockets application, it demonstrates scalable state management, modern premium UI/UX design (glassmorphism), and real-time multiplayer synchronization.
 
-## 🚀 Live Demo & Links
-- **Deployed App Link:** *(Deploy to Vercel/Render and insert link here)*
-- **GitHub Repository:** *(Insert your Github URL here)*
-
+## Live Demo & Links
+- **Deployed App Link:** https://gridwars-ochre.vercel.app/
+- **GitHub Repository:** https://github.com/Raih1107/gridwars/
 ---
 
 ## 🛠 Tech Stack Used
